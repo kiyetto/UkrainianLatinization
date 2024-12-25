@@ -16,11 +16,18 @@ body {
     flex-direction: column;
 }
 
-#title {
+#title, #subtitle {
     padding: 10px;
     font-family: 'Roboto', sans-serif;
     font-size: 40px;
+}
+
+#title {
     font-weight: bold;
+}
+
+#subtitle {
+    font-weight: normal;
 }
 
 /* Flexbox for fields - placing input on the left and output on the right */
