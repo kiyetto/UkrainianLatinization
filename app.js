@@ -89,11 +89,22 @@ const convertBtn = document.getElementById('convert');
 const copyBtn = document.getElementById('copy');
 const clearBtn = document.getElementById('clear');
 
-convertBtn.onclick = () => {
+function convert() {
     outputField.innerHTML = '';
     convertedText = convert(input.value);
     outputField.innerHTML = convert(input.value);
 }
+
+convertBtn.onclick = () => {
+    convert();
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        convert();
+    }
+});
+
 
 copyBtn.onclick = () => {
     // Get the text content of the output field
