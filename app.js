@@ -89,19 +89,19 @@ const convertBtn = document.getElementById('convert');
 const copyBtn = document.getElementById('copy');
 const clearBtn = document.getElementById('clear');
 
-function convert() {
+function convertInput() {
     outputField.innerHTML = '';
     convertedText = convert(input.value);
     outputField.innerHTML = convert(input.value);
 }
 
 convertBtn.onclick = () => {
-    convert();
+    convertInput();
 }
 
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
-        convert();
+        convertInput();
     }
 });
 
