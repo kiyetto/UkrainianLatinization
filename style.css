@@ -1,0 +1,72 @@
+/* General reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1E2A47; /* Dark Blue Background */
+    color: white; /* White Text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+#title {
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+/* Flexbox for fields - placing input on the left and output on the right */
+#fields {
+    display: flex;
+    gap: 20px; /* Space between fields */
+    margin-bottom: 30px;
+    width: 80%; /* Limit the width to ensure fields don't stretch too far */
+    justify-content: center;
+}
+
+#input, #output {
+    width: 40%; /* Both fields take up 40% of the parent container */
+    height: 300px; /* Increased height */
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2C3E50; /* Dark background for the fields */
+    color: white;
+    font-size: 16px;
+    resize: none;
+    overflow: scroll;
+}
+/* Buttons container styling */
+#buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    background-color: #3498db; /* Bright blue for buttons */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+button:active {
+    background-color: #1c5985; /* Even darker blue when clicked */
+}
