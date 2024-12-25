@@ -38,7 +38,7 @@ map = {
 function jottedVowelsConvert(input) {
     let output = '';
 
-    const exceptionChars = "АЕІОУЯЄЇЮаеіоуяєїюь'ʼ\0 ";
+    const exceptionChars = "АЕІОУЯЄЇЮаеіоуяєїюь'ʼ\0\n ";
     const jottedChars = "яєїю";
 
     for(let i = 0; i < input.length; i++) {
