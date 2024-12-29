@@ -35,8 +35,38 @@ map = {
     '\'': '\0', 'ʼ': '\0'
 }
 
+function separateIWithVowels(input) {
+    let output = '';
+
+    for(let i = 0; i < input.length; i++) {
+        if (input[i] == 'і' && input[i + 1] == 'а') {
+            output += 'ія';
+            i++;
+        } 
+        else if (input[i] == 'і' && input[i + 1] == 'о') {
+            output += 'ійо';
+            i++;
+        } 
+        else if (input[i] == 'і' && input[i + 1] == 'е') {
+            output += 'іє';
+            i++;
+        } 
+        else if (input[i] == 'і' && input[i + 1] == 'у') {
+            output += 'ію';
+            i++;
+        } 
+        else {
+            output += input[i];
+        }
+    }
+
+    return output;
+}
+
 function jottedVowelsConvert(input) {
     let output = '';
+
+    input = separateIWithVowels(input)
 
     const exceptionChars = "АЕІОУЯЄЇЮаеіоуяєїюь'ʼ\0 ";
     const jottedChars = "яєїю";
