@@ -11,7 +11,7 @@ map = {
     'З': 'Z', 'з': 'z',
     'И': 'Y', 'и': 'y',
     'І': 'I', 'і': 'i',
-    'Ї': 'Ji', 'ї': 'ji',
+    'Ї': 'Ï', 'ї': 'Ï',
     'Й': 'J', 'й': 'j',
     'К': 'K', 'к': 'k',
     'Л': 'L', 'л': 'l',
@@ -35,36 +35,6 @@ map = {
     '\'': '\0', 'ʼ': '\0'
 }
 
-function separateIWithVowels(input) {
-    let output = '';
-
-    input = separateIWithVowels(input);
-    
-    for(let i = 0; i < input.length; i++) {
-        if (input[i] == 'і' && input[i + 1] == 'а') {
-            output += 'ія';
-            i++;
-        } 
-        else if (input[i] == 'і' && input[i + 1] == 'о') {
-            output += 'ійо';
-            i++;
-        } 
-        else if (input[i] == 'і' && input[i + 1] == 'е') {
-            output += 'іє';
-            i++;
-        } 
-        else if (input[i] == 'і' && input[i + 1] == 'у') {
-            output += 'ію';
-            i++;
-        } 
-        else {
-            output += input[i];
-        }
-    }
-
-    return output;
-}
-
 function jottedVowelsConvert(input) {
     let output = '';
 
@@ -73,17 +43,17 @@ function jottedVowelsConvert(input) {
 
     for(let i = 0; i < input.length; i++) {
         if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'іа';
+            output += 'ä';
         } 
         else if(input[i] == 'є' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'іe';
+            output += 'ë';
         } 
         else if(input[i] == 'ю' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'іu';
+            output += 'ü';
         } 
         else if(input[i] == 'ь' && input[i + 1] == 'о') {
-            output += 'i';
-
+            output += 'ö';
+            i++;
         }
         else {
             output += input[i]
