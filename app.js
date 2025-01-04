@@ -29,7 +29,7 @@ map = {
     'Ч': 'Č', 'ч': 'č',
     'Ш': 'Š', 'ш': 'š',
     'Щ': 'Šč', 'щ': 'šč',
-    'Ь': 'Ĭ', 'ь': 'ĭ',
+    'Ь': '\'', 'ь': '\'',
     'Ю': 'Ju', 'ю': 'ju',
     'Я': 'Ja', 'я': 'ja',
     '\'': '\0', 'ʼ': '\0', '´': '\0',
@@ -43,14 +43,17 @@ function jottedVowelsConvert(input) {
 
     for(let i = 0; i < input.length; i++) {
         if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'ĭa';
+            output += 'ä';
         } 
         else if(input[i] == 'є' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'ĭe';
+            output += 'ë';
         } 
         else if(input[i] == 'ю' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'ĭu';
+            output += 'ü';
         } 
+        else if(input[i] == 'ь' && input[i + 1] == 'о') {
+            output += 'ö'; i++;
+        }    
         else {
             output += input[i]
         }
