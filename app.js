@@ -42,8 +42,20 @@ function jottedVowelsConvert(input) {
     const jottedChars = "яєїю";
 
     for(let i = 0; i < input.length; i++) { 
-        if(input[i] == 'ь' && input[i + 1] == 'о') {
-            output += 'y';
+        if(input[i] == 'і' && "аеіоуи".includes(input[i + 1]) {
+            output += 'iy';
+        }    
+        else if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
+            output += 'ia';
+        }  
+        else if(input[i] == 'є' && !exceptionChars.includes(input[i - 1]) && i != 0) {
+            output += 'ie';
+        }  
+        else if(input[i] == 'ю' && !exceptionChars.includes(input[i - 1]) && i != 0) {
+            output += 'iu';
+        }    
+        else if(input[i] == 'ь' && input[i + 1] == 'о') {
+            output += 'i';
         }  
         else {
             output += input[i]
