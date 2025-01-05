@@ -31,8 +31,7 @@ map = {
     'Щ': 'Şç', 'щ': 'şç',
     'Ь': 'ʼ', 'ь': 'ʼ',
     'Ю': 'Yu', 'ю': 'yu',
-    'Я': 'Ya', 'я': 'ya',
-    '\'': '`', 'ʼ': '`', '´': '`',
+    'Я': 'Ya', 'я': 'ya'
 }
 
 function jottedVowelsConvert(input) {
@@ -41,21 +40,21 @@ function jottedVowelsConvert(input) {
     const exceptionChars = "АЕІОУЯЄЇЮИаеіоуяєїюьи'ʼ\0\n\"«»=×^£¢€¥%\(\)\{\}\[\]&-—–·:;?!*\\/@#№|§∆+1234567890´` ";
     const jottedChars = "яєїю";
 
-    for(let i = 0; i < input.length; i++) { 
-        if(input[i] == 'і' && "аеіоуи".includes(input[i + 1]) {
-            output += 'iy';
+    for(let i = 0; i < input.length; i++) {  
+        if("'ʼ`´".includes(input[i]) && input[i + 1] == 'я') {
+            output += 'ÿa'; i++;
         }    
-        else if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'ia';
-        }  
-        else if(input[i] == 'є' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'ie';
-        }  
-        else if(input[i] == 'ю' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'iu';
-        }    
+        if("'ʼ`´".includes(input[i]) && input[i + 1] == 'є') {
+            output += 'ÿe'; i++;
+        } 
+        if("'ʼ`´".includes(input[i]) && input[i + 1] == 'ю') {
+            output += 'ÿu'; i++;
+        } 
+        if(!exceptionChars.includes(input[i - 1]) && input[i] == 'й' && input[i + 1] == 'о' && i != 0) {
+            output += 'ÿo'; i++;
+        } 
         else if(input[i] == 'ь' && input[i + 1] == 'о') {
-            output += 'i';
+            output += 'y';
         }  
         else {
             output += input[i]
