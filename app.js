@@ -49,7 +49,7 @@ function jottedVowelsConvert(input) {
             output += 'ĭe';
         } 
         else if(input[i] == 'ю' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'iu';
+            output += 'ĭu';
         } 
         else {
             output += input[i]
