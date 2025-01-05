@@ -6,13 +6,13 @@ map = {
     'Ґ': 'G', 'ґ': 'g',
     'Д': 'D', 'д': 'd',
     'Е': 'E', 'е': 'e',
-    'Є': 'Ye', 'є': 'ye',
+    'Є': 'Je', 'є': 'je',
     'Ж': 'J', 'ж': 'j',
     'З': 'Z', 'з': 'z',
-    'И': 'Ĭ', 'и': 'ĭ',
+    'И': 'Y', 'и': 'y',
     'І': 'I', 'і': 'i',
-    'Ї': 'Yi', 'ї': 'yi',
-    'Й': 'Y', 'й': 'y',
+    'Ї': 'Ï', 'ї': 'ï',
+    'Й': 'J', 'й': 'j'
     'К': 'K', 'к': 'k',
     'Л': 'L', 'л': 'l',
     'М': 'M', 'м': 'm',
@@ -26,12 +26,14 @@ map = {
     'Ф': 'F', 'ф': 'f',
     'Х': 'Ħ', 'х': 'ħ',
     'Ц': 'C', 'ц': 'c',
-    'Ч': 'Ç', 'ч': 'ç',
-    'Ш': 'Ş', 'ш': 'ş',
-    'Щ': 'Şç', 'щ': 'şç',
+    'Ч': 'Č', 'ч': 'č',
+    'Ш': 'Š', 'ш': 'š',
+    'Щ': 'Šč', 'щ': 'šč',
     'Ь': 'ʼ', 'ь': 'ʼ',
-    'Ю': 'Yu', 'ю': 'yu',
-    'Я': 'Ya', 'я': 'ya'
+    'Ю': 'Ju', 'ю': 'ju',
+    'Я': 'Ja', 'я': 'ja',
+    '\'': '\0', 'ʼ': '\0', 
+    '`': '\0', '´': '\0',
 }
 
 function jottedVowelsConvert(input) {
@@ -41,21 +43,21 @@ function jottedVowelsConvert(input) {
     const jottedChars = "яєїю";
 
     for(let i = 0; i < input.length; i++) {  
-        if("'ʼ`´".includes(input[i]) && input[i + 1] == 'я') {
-            output += 'ÿa'; i++;
+        if(input[i] == 'і' && "аеіоуи".includes(input[i + 1])) {
+            output += 'ї';
+        }   
+        else if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
+            output += 'ia';
+        }   
+        else if(input[i] == 'є' && !exceptionChars.includes(input[i - 1]) && i != 0) {
+            output += 'ie';
         }    
-        else if("'ʼ`´".includes(input[i]) && input[i + 1] == 'є') {
-            output += 'ÿe'; i++;
-        } 
-        else if("'ʼ`´".includes(input[i]) && input[i + 1] == 'ю') {
-            output += 'ÿu'; i++;
-        } 
-        else if(!exceptionChars.includes(input[i - 1]) && input[i] == 'й' && input[i + 1] == 'о' && i != 0) {
-            output += 'ÿo'; i++;
-        } 
+        else if(input[i] == 'ю' && !exceptionChars.includes(input[i - 1]) && i != 0) {
+            output += 'iu';
+        }    
         else if(input[i] == 'ь' && input[i + 1] == 'о') {
-            output += 'y';
-        }  
+            output += 'i';
+        }    
         else {
             output += input[i]
         }
