@@ -44,13 +44,13 @@ function jottedVowelsConvert(input) {
         if("'ʼ`´".includes(input[i]) && input[i + 1] == 'я') {
             output += 'ÿa'; i++;
         }    
-        if("'ʼ`´".includes(input[i]) && input[i + 1] == 'є') {
+        else if("'ʼ`´".includes(input[i]) && input[i + 1] == 'є') {
             output += 'ÿe'; i++;
         } 
-        if("'ʼ`´".includes(input[i]) && input[i + 1] == 'ю') {
+        else if("'ʼ`´".includes(input[i]) && input[i + 1] == 'ю') {
             output += 'ÿu'; i++;
         } 
-        if(!exceptionChars.includes(input[i - 1]) && input[i] == 'й' && input[i + 1] == 'о' && i != 0) {
+        else if(!exceptionChars.includes(input[i - 1]) && input[i] == 'й' && input[i + 1] == 'о' && i != 0) {
             output += 'ÿo'; i++;
         } 
         else if(input[i] == 'ь' && input[i + 1] == 'о') {
