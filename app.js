@@ -11,7 +11,7 @@ map = {
     'З': 'Z', 'з': 'z',
     'И': 'Y', 'и': 'y',
     'І': 'I', 'і': 'i',
-    'Ї': 'Ï', 'ї': 'ï',
+    'Ї': 'Ji', 'ї': 'ji',
     'Й': 'J', 'й': 'j',
     'К': 'K', 'к': 'k',
     'Л': 'L', 'л': 'l',
@@ -45,7 +45,7 @@ function jottedVowelsConvert(input) {
 
     for(let i = 0; i < input.length; i++) {  
         if(input[i] == 'і' && "аеіоуи".includes(input[i + 1])) {
-            output += 'ї';
+            output += 'ji';
         }   
         else if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
             output += 'ia';
