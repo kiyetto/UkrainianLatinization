@@ -2,8 +2,8 @@ map = {
     'А': 'A', 'а': 'a',
     'Б': 'B', 'б': 'b',
     'В': 'V', 'в': 'v',
-    'Г': 'G', 'г': 'g',
-    'Ґ': 'Ĝ', 'ґ': 'ĝ',
+    'Г': 'H', 'г': 'h',
+    'Ґ': 'G', 'ґ': 'g',
     'Д': 'D', 'д': 'd',
     'Е': 'E', 'е': 'e',
     'Є': 'Je', 'є': 'je',
@@ -24,66 +24,91 @@ map = {
     'Т': 'T', 'т': 't',
     'У': 'U', 'у': 'u',
     'Ф': 'F', 'ф': 'f',
-    'Х': 'H', 'х': 'h',
+    'Х': 'Ħ', 'х': 'ħ',
     'Ц': 'C', 'ц': 'c',
     'Ч': 'Č', 'ч': 'č',
     'Ш': 'Š', 'ш': 'š',
     'Щ': 'Šč', 'щ': 'šč',
-    'Ь': '\'', 'ь': '\'',
+    'Ь': 'ʼ', 'ь': 'ʼ',
     'Ю': 'Ju', 'ю': 'ju',
     'Я': 'Ja', 'я': 'ja',
-    '\'': '\0', 'ʼ': '\0'
+    '\'': '\0', 'ʼ': '\0', 
+    '`': '\0', '´': '\0', 
+    '’': '\0'
 }
 
-function separateIWithVowels(input) {
+function handleSpecialCases(input) {
     let output = '';
 
-    for(let i = 0; i < input.length; i++) {
-        if (input[i] == 'і' && input[i + 1] == 'а') {
-            output += 'ія';
-            i++;
-        } 
-        else if (input[i] == 'і' && input[i + 1] == 'о') {
-            output += 'ійо';
-            i++;
-        } 
-        else if (input[i] == 'і' && input[i + 1] == 'е') {
-            output += 'іє';
-            i++;
-        } 
-        else if (input[i] == 'і' && input[i + 1] == 'у') {
-            output += 'ію';
-            i++;
-        } 
-        else {
-            output += input[i];
-        }
-    }
-
-    return output;
-}
-
-function jottedVowelsConvert(input) {
-    let output = '';
-
-    input = separateIWithVowels(input)
-
-    const exceptionChars = "АЕІОУЯЄЇЮаеіоуяєїюь'ʼ\0 ";
+    const exceptionChars = "АЕІОУЯЄЇЮИаеіоуяєїюьи'ʼ\0\n\"«»=×^£¢€¥%\(\)\{\}\[\]&-—–·:;?!*\\/@#№|§∆+1234567890´`’ ";
     const jottedChars = "яєїю";
 
-    for(let i = 0; i < input.length; i++) {
-        if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'іа';
-        } 
+    for(let i = 0; i < input.length; i++) {  
+        // Handle i + vowel to avoid it being read as a softened consonants
+        if(input[i] == 'і' && "аеіоуи".includes(input[i + 1])) {
+            output += 'ji';
+        }   
+        // Turn jotted vowels (я, є, ю ...) to their soft version
+        else if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
+            output += 'ia';
+        }   
         else if(input[i] == 'є' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'іe';
-        } 
+            output += 'ie';
+        }    
         else if(input[i] == 'ю' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'іu';
-        } 
+            output += 'iu';
+        }    
         else if(input[i] == 'ь' && input[i + 1] == 'о') {
             output += 'i';
-
+        }    
+        // Handle soft signs
+        else if(input[i] == 'Ц' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
+            output += 'ć';
+        }
+        else if(input[i] == 'Д' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
+            output += 'ď';
+        }
+        else if(input[i] == 'Л' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
+            output += 'ľ';
+        }
+        else if(input[i] == 'Н' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
+            output += 'ń';
+        }
+        else if(input[i] == 'Р' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
+            output += 'ŕ';
+        }
+        else if(input[i] == 'С' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
+            output += 'ś';
+        }
+        else if(input[i] == 'Т' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
+            output += 'ť';
+        }
+        else if(input[i] == 'З' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
+            output += 'ź';
+        }
+        else if(input[i] == 'ц' && input[i + 1] == 'ь') {
+            output += 'ć';
+        }
+        else if(input[i] == 'д' && input[i + 1] == 'ь') {
+            output += 'ď';
+        }
+        else if(input[i] == 'л' && input[i + 1] == 'ь') {
+            output += 'ľ';
+        }
+        else if(input[i] == 'н' && input[i + 1] == 'ь') {
+            output += 'ń';
+        }
+        else if(input[i] == 'р' && input[i + 1] == 'ь') {
+            output += 'ŕ';
+        }
+        else if(input[i] == 'с' && input[i + 1] == 'ь') {
+            output += 'ś';
+        }
+        else if(input[i] == 'т' && input[i + 1] == 'ь') {
+            output += 'ť';
+        }
+        else if(input[i] == 'з' && input[i + 1] == 'ь') {
+            output += 'ź';
         }
         else {
             output += input[i]
