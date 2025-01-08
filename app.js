@@ -63,52 +63,52 @@ function handleSpecialCases(input) {
         }    
         // Handle soft signs
         else if(input[i] == 'Ц' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ć';
+            output += 'ć'; i++;
         }
         else if(input[i] == 'Д' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ď';
+            output += 'ď';i++;
         }
         else if(input[i] == 'Л' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ľ';
+            output += 'ľ';i++;
         }
         else if(input[i] == 'Н' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ń';
+            output += 'ń'; i++;
         }
         else if(input[i] == 'Р' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ŕ';
+            output += 'ŕ'; i++;
         }
         else if(input[i] == 'С' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ś';
+            output += 'ś'; i++;
         }
         else if(input[i] == 'Т' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ť';
+            output += 'ť'; i++;
         }
         else if(input[i] == 'З' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ź';
+            output += 'ź'; i++;
         }
         else if(input[i] == 'ц' && input[i + 1] == 'ь') {
-            output += 'ć';
+            output += 'ć'; i++;
         }
         else if(input[i] == 'д' && input[i + 1] == 'ь') {
-            output += 'ď';
+            output += 'ď'; i++;
         }
         else if(input[i] == 'л' && input[i + 1] == 'ь') {
-            output += 'ľ';
+            output += 'ľ'; i++;
         }
         else if(input[i] == 'н' && input[i + 1] == 'ь') {
-            output += 'ń';
+            output += 'ń'; i++;
         }
         else if(input[i] == 'р' && input[i + 1] == 'ь') {
-            output += 'ŕ';
+            output += 'ŕ'; i++;
         }
         else if(input[i] == 'с' && input[i + 1] == 'ь') {
-            output += 'ś';
+            output += 'ś'; i++;
         }
         else if(input[i] == 'т' && input[i + 1] == 'ь') {
-            output += 'ť';
+            output += 'ť'; i++;
         }
         else if(input[i] == 'з' && input[i + 1] == 'ь') {
-            output += 'ź';
+            output += 'ź'; i++;
         }
         else {
             output += input[i]
