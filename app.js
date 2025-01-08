@@ -49,6 +49,9 @@ function handleSpecialCases(input) {
             output += 'ji';
         }   
         // Turn jotted vowels (я, є, ю ...) to their soft version
+        if(input[i] == 'і' && "аеіоуи".includes(input[i + 1])) {
+            output += 'ji';
+        }   
         else if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
             output += 'ia';
         }   
