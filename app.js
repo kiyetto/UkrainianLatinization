@@ -37,32 +37,12 @@ map = {
     '’': '\0'
 }
 
-function handleSpecialCases(input) {
+function handleSoftSigns(input) {
     let output = '';
 
-    const exceptionChars = "АЕІОУЯЄЇЮИаеіоуяєїюьи'ʼ\0\n\"«»=×^£¢€¥%\(\)\{\}\[\]&-—–·:;?!*\\/@#№|§∆+1234567890´`’ ";
-    const jottedChars = "яєїю";
-
-    for(let i = 0; i < input.length; i++) {  
-        // Handle i + vowel to avoid it being read as a softened consonants
-        if(input[i] == 'і' && "аеіоуи".includes(input[i + 1])) {
-            output += 'ji';
-        }   
-        // Turn jotted vowels (я, є, ю ...) to their soft version
-        else if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'ia';
-        }   
-        else if(input[i] == 'є' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'ie';
-        }    
-        else if(input[i] == 'ю' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'iu';
-        }    
-        else if(input[i] == 'ь' && input[i + 1] == 'о') {
-            output += 'i';
-        }    
+    for(let i = 0; i < input.length; i++) {
         // Handle soft signs
-        else if(input[i] == 'Ц' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
+        if(input[i] == 'Ц' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
             output += 'ć'; i++;
         }
         else if(input[i] == 'Д' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
@@ -113,6 +93,38 @@ function handleSpecialCases(input) {
         else {
             output += input[i]
         }
+    }    
+
+    return output;
+}    
+
+function handleJottedCharacters(input) {
+    let output = '';
+
+    const exceptionChars = "АЕІОУЯЄЇЮИаеіоуяєїюьи'ʼ\0\n\"«»=×^£¢€¥%\(\)\{\}\[\]&-—–·:;?!*\\/@#№|§∆+1234567890´`’ ";
+    const jottedChars = "яєїю";
+
+    for(let i = 0; i < input.length; i++) {  
+        // Handle i + vowel to avoid it being read as a softened consonants
+        if(input[i] == 'і' && "аеіоуи".includes(input[i + 1])) {
+            output += 'ji';
+        }   
+        // Turn jotted vowels (я, є, ю ...) to their soft version
+        else if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
+            output += 'ia';
+        }   
+        else if(input[i] == 'є' && !exceptionChars.includes(input[i - 1]) && i != 0) {
+            output += 'ie';
+        }    
+        else if(input[i] == 'ю' && !exceptionChars.includes(input[i - 1]) && i != 0) {
+            output += 'iu';
+        }    
+        else if(input[i] == 'ь' && input[i + 1] == 'о') {
+            output += 'i';
+        }    
+        else {
+            output += input[i]
+        }
     }
 
     return output;
@@ -121,7 +133,8 @@ function handleSpecialCases(input) {
 function convert(input) {
     let output = '';
 
-    input = handleSpecialCases(input);
+    input = handleJottedCharacters(input);
+    input = handleSoftSigns(input);
 
     input.split('').forEach((element) => {
         if (map[element]) {
