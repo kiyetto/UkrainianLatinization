@@ -121,7 +121,7 @@ function handleSpecialCases(input) {
 function convert(input) {
     let output = '';
 
-    input = jottedVowelsConvert(input);
+    input = handleSpecialCases(input);
 
     input.split('').forEach((element) => {
         if (map[element]) {
