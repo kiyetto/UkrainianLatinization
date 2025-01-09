@@ -29,7 +29,7 @@ map = {
     'Ч': 'Č', 'ч': 'č',
     'Ш': 'Š', 'ш': 'š',
     'Щ': 'Šč', 'щ': 'šč',
-    'Ь': 'ʼ', 'ь': 'ʼ',
+    'Ь': '́', 'ь': '́',
     'Ю': 'Ju', 'ю': 'ju',
     'Я': 'Ja', 'я': 'ja',
     '\'': '\0', 'ʼ': '\0', 
@@ -134,7 +134,6 @@ function convert(input) {
     let output = '';
 
     input = handleJottedCharacters(input);
-    input = handleSoftSigns(input);
 
     input.split('').forEach((element) => {
         if (map[element]) {
