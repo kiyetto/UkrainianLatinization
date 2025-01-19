@@ -37,9 +37,6 @@ map = {
     '’': '\0'
 }
 
-function handleSoftSigns(input) {
-    let output = '';
-
 function handleJottedCharacters(input) {
     let output = '';
 
