@@ -59,7 +59,7 @@ function softening(input) {
 
     for(let i = 0; i < input.length; i++) {
         if(softLetters[input[i]] && 'Ьь'.includes(input[i + 1])) {
-            output += softLetters(input[i]); i++;
+            output += softLetters[input[i]]; i++;
         }
         else {
             output += input[i];
