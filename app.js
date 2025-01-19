@@ -37,7 +37,39 @@ map = {
     '’': '\0'
 }
 
-function handleJottedCharacters(input) {
+softLetters = {
+    'ц': 'ć',
+    'с': 'ś',
+    'з': 'ź',
+    'н': 'ń',
+    'л': 'ľ',
+    'т': 'ť',
+    'д': 'ď',
+    'Ц': 'Ć',
+    'С': 'Ś',
+    'З': 'Ź',
+    'Н': 'Ń',
+    'Л': 'Ľ',
+    'Т': 'Ť',
+    'Д': 'Ď'
+}    
+
+function softening(input) {
+    let output = '';
+
+    for(let i = 0; i < input.length; i++) {
+        if(softLetters(input[i]) && 'Ьь'.includes(input[i + 1])) {
+            output += softLetters(input[i]); i++;
+        }
+        else {
+            output += input[i];
+        }     
+    }    
+    
+    return output;
+}    
+
+function jotation(input) {
     let output = '';
 
     const exceptionChars = "АЕІОУЯЄЇЮИаеіоуяєїюьи'ʼ\0\n\"«»=×^£¢€¥%\(\)\{\}\[\]&-—–·:;?!*\\/@#№|§∆+1234567890´`’ ";
@@ -46,17 +78,17 @@ function handleJottedCharacters(input) {
     for(let i = 0; i < input.length; i++) {  
         // Handle i + vowel to avoid it being read as a softened consonants
         if(input[i] == 'і' && "аеіоуи".includes(input[i + 1])) {
-            output += 'ji';
+            output += 'ij';
         }   
         // Turn jotted vowels (я, є, ю ...) to their soft version
         else if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'ıa';
+            output += 'ia';
         }   
         else if(input[i] == 'є' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'ıe';
+            output += 'ie';
         }    
         else if(input[i] == 'ю' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'ıu';
+            output += 'iu';
         }    
         else {
             output += input[i]
@@ -69,7 +101,8 @@ function handleJottedCharacters(input) {
 function convert(input) {
     let output = '';
 
-    input = handleJottedCharacters(input);
+    input = jotation(input);
+    input = softening(input);
 
     input.split('').forEach((element) => {
         if (map[element]) {
