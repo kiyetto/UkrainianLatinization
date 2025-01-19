@@ -10,7 +10,7 @@ map = {
     'Ж': 'Ž', 'ж': 'ž',
     'З': 'Z', 'з': 'z',
     'И': 'Y', 'и': 'y',
-    'І': 'I', 'і': 'i',
+    'І': 'İ', 'і': 'i',
     'Ї': 'Ji', 'ї': 'ji',
     'Й': 'J', 'й': 'j',
     'К': 'K', 'к': 'k',
@@ -29,7 +29,7 @@ map = {
     'Ч': 'Č', 'ч': 'č',
     'Ш': 'Š', 'ш': 'š',
     'Щ': 'Šč', 'щ': 'šč',
-    'Ь': 'ʼ', 'ь': 'ʼ',
+    'Ь': 'I', 'ь': 'ı',
     'Ю': 'Ju', 'ю': 'ju',
     'Я': 'Ja', 'я': 'ja',
     '\'': '\0', 'ʼ': '\0', 
@@ -37,7 +37,39 @@ map = {
     '’': '\0'
 }
 
-function handleSpecialCases(input) {
+softLetters = {
+    'ц': 'ć',
+    'с': 'ś',
+    'з': 'ź',
+    'н': 'ń',
+    'л': 'ľ',
+    'т': 'ť',
+    'д': 'ď',
+    'Ц': 'Ć',
+    'С': 'Ś',
+    'З': 'Ź',
+    'Н': 'Ń',
+    'Л': 'Ľ',
+    'Т': 'Ť',
+    'Д': 'Ď'
+}    
+
+function softening(input) {
+    let output = '';
+
+    for(let i = 0; i < input.length; i++) {
+        if(softLetters[input[i]] && 'Ьь'.includes(input[i + 1])) {
+            output += softLetters[input[i]]; i++;
+        }
+        else {
+            output += input[i];
+        }     
+    }    
+    
+    return output;
+}    
+
+function jotation(input) {
     let output = '';
 
     const exceptionChars = "АЕІОУЯЄЇЮИаеіоуяєїюьи'ʼ\0\n\"«»=×^£¢€¥%\(\)\{\}\[\]&-—–·:;?!*\\/@#№|§∆+1234567890´`’ ";
@@ -46,12 +78,9 @@ function handleSpecialCases(input) {
     for(let i = 0; i < input.length; i++) {  
         // Handle i + vowel to avoid it being read as a softened consonants
         if(input[i] == 'і' && "аеіоуи".includes(input[i + 1])) {
-            output += 'ji';
+            output += 'ij';
         }   
         // Turn jotted vowels (я, є, ю ...) to their soft version
-        if(input[i] == 'і' && "аеіоуи".includes(input[i + 1])) {
-            output += 'ji';
-        }   
         else if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
             output += 'ia';
         }   
@@ -61,58 +90,6 @@ function handleSpecialCases(input) {
         else if(input[i] == 'ю' && !exceptionChars.includes(input[i - 1]) && i != 0) {
             output += 'iu';
         }    
-        else if(input[i] == 'ь' && input[i + 1] == 'о') {
-            output += 'i';
-        }    
-        // Handle soft signs
-        else if(input[i] == 'Ц' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ć';
-        }
-        else if(input[i] == 'Д' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ď';
-        }
-        else if(input[i] == 'Л' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ľ';
-        }
-        else if(input[i] == 'Н' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ń';
-        }
-        else if(input[i] == 'Р' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ŕ';
-        }
-        else if(input[i] == 'С' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ś';
-        }
-        else if(input[i] == 'Т' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ť';
-        }
-        else if(input[i] == 'З' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ź';
-        }
-        else if(input[i] == 'ц' && input[i + 1] == 'ь') {
-            output += 'ć';
-        }
-        else if(input[i] == 'д' && input[i + 1] == 'ь') {
-            output += 'ď';
-        }
-        else if(input[i] == 'л' && input[i + 1] == 'ь') {
-            output += 'ľ';
-        }
-        else if(input[i] == 'н' && input[i + 1] == 'ь') {
-            output += 'ń';
-        }
-        else if(input[i] == 'р' && input[i + 1] == 'ь') {
-            output += 'ŕ';
-        }
-        else if(input[i] == 'с' && input[i + 1] == 'ь') {
-            output += 'ś';
-        }
-        else if(input[i] == 'т' && input[i + 1] == 'ь') {
-            output += 'ť';
-        }
-        else if(input[i] == 'з' && input[i + 1] == 'ь') {
-            output += 'ź';
-        }
         else {
             output += input[i]
         }
@@ -124,7 +101,8 @@ function handleSpecialCases(input) {
 function convert(input) {
     let output = '';
 
-    input = jottedVowelsConvert(input);
+    input = jotation(input);
+    input = softening(input);
 
     input.split('').forEach((element) => {
         if (map[element]) {
