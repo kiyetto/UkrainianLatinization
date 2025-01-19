@@ -29,7 +29,7 @@ map = {
     'Ч': 'Č', 'ч': 'č',
     'Ш': 'Š', 'ш': 'š',
     'Щ': 'Šč', 'щ': 'šč',
-    'Ь': '́', 'ь': '́',
+    'Ь': 'Ĭ', 'ь': 'ı',
     'Ю': 'Ju', 'ю': 'ju',
     'Я': 'Ja', 'я': 'ja',
     '\'': '\0', 'ʼ': '\0', 
@@ -39,64 +39,6 @@ map = {
 
 function handleSoftSigns(input) {
     let output = '';
-
-    for(let i = 0; i < input.length; i++) {
-        // Handle soft signs
-        if(input[i] == 'Ц' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ć'; i++;
-        }
-        else if(input[i] == 'Д' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ď';i++;
-        }
-        else if(input[i] == 'Л' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ľ';i++;
-        }
-        else if(input[i] == 'Н' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ń'; i++;
-        }
-        else if(input[i] == 'Р' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ŕ'; i++;
-        }
-        else if(input[i] == 'С' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ś'; i++;
-        }
-        else if(input[i] == 'Т' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ť'; i++;
-        }
-        else if(input[i] == 'З' && (input[i + 1] == 'ь' || input[i + 1] == 'Ь')) {
-            output += 'ź'; i++;
-        }
-        else if(input[i] == 'ц' && input[i + 1] == 'ь') {
-            output += 'ć'; i++;
-        }
-        else if(input[i] == 'д' && input[i + 1] == 'ь') {
-            output += 'ď'; i++;
-        }
-        else if(input[i] == 'л' && input[i + 1] == 'ь') {
-            output += 'ľ'; i++;
-        }
-        else if(input[i] == 'н' && input[i + 1] == 'ь') {
-            output += 'ń'; i++;
-        }
-        else if(input[i] == 'р' && input[i + 1] == 'ь') {
-            output += 'ŕ'; i++;
-        }
-        else if(input[i] == 'с' && input[i + 1] == 'ь') {
-            output += 'ś'; i++;
-        }
-        else if(input[i] == 'т' && input[i + 1] == 'ь') {
-            output += 'ť'; i++;
-        }
-        else if(input[i] == 'з' && input[i + 1] == 'ь') {
-            output += 'ź'; i++;
-        }
-        else {
-            output += input[i]
-        }
-    }    
-
-    return output;
-}    
 
 function handleJottedCharacters(input) {
     let output = '';
@@ -111,16 +53,13 @@ function handleJottedCharacters(input) {
         }   
         // Turn jotted vowels (я, є, ю ...) to their soft version
         else if(input[i] == 'я' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'ia';
+            output += 'ıa';
         }   
         else if(input[i] == 'є' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'ie';
+            output += 'ıe';
         }    
         else if(input[i] == 'ю' && !exceptionChars.includes(input[i - 1]) && i != 0) {
-            output += 'iu';
-        }    
-        else if(input[i] == 'ь' && input[i + 1] == 'о') {
-            output += 'i';
+            output += 'ıu';
         }    
         else {
             output += input[i]
