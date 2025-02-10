@@ -36,7 +36,7 @@ body {
 #fields {
     display: flex;
     gap: 20px; /* Space between fields */
-    margin-bottom: 30px;
+    margin: 30px;
     width: 80%; /* Limit the width to ensure fields don't stretch too far */
     justify-content: center;
 }
