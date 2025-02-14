@@ -29,7 +29,7 @@ map = {
     'Ч': 'Č', 'ч': 'č',
     'Ш': 'Š', 'ш': 'š',
     'Щ': 'Šč', 'щ': 'šč',
-    'Ь': 'I', 'ь': 'ı',
+    'Ь': '\0', 'ь': '\0',
     'Ю': 'Ju', 'ю': 'ju',
     'Я': 'Ja', 'я': 'ja',
     '\'': '\0', 'ʼ': '\0', 
@@ -41,14 +41,14 @@ softLetters = {
     'с': 'ś',
     'з': 'ź',
     'н': 'ń',
-    'л': 'ľ',
+    'л': 'ĺ',
     'т': 'ť',
     'д': 'ď',
     'Ц': 'Ć',
     'С': 'Ś',
     'З': 'Ź',
     'Н': 'Ń',
-    'Л': 'Ľ',
+    'Л': 'Ĺ',
     'Т': 'Ť',
     'Д': 'Ď'
 }    
@@ -123,29 +123,16 @@ function convert(input) {
     return output;
 }
 
-let mode = "cyr-to-lat";
-
 const inputField = document.getElementById('input');
 const outputField = document.getElementById('output');
 const convertBtn = document.getElementById('convert');
 const copyBtn = document.getElementById('copy');
 const clearBtn = document.getElementById('clear');
-const modeBtn = document.getElementById('convert-mode-switch');
 
 function convertInput() {
     outputField.innerHTML = '';
     convertedText = convert(input.value);
     outputField.innerHTML = convert(input.value);
-}
-
-modeBtn.onclick = () => {
-    if(mode == "cyr-to-lat") {
-        mode = "lat-to-cyr";
-        modeBtn.innerHTML = "Lat->Кир";
-    } else {
-        mode = "cyr-to-lat";
-        modeBtn.innerHTML = "Кир->Lat";
-    }
 }
 
 convertBtn.onclick = () => {
@@ -159,22 +146,12 @@ document.addEventListener('keydown', function(event) {
 });
 
 copyBtn.onclick = () => {
-    const textToCopy = outputField.innerText;
-
-    if (textToCopy) {
+    if (outputField.innerText) {
         navigator.clipboard.writeText(textToCopy)
-            .then(() => {
-                alert('Text copied to clipboard!');
-            })
-            .catch((err) => {
-                console.error('Failed to copy text: ', err);
-            });
-    } else {
-        alert('No text to copy!');
     }
+
 }
 
-// Clear button functionality
 clearBtn.onclick = () => {
     inputField.value = '';
     outputField.innerHTML = '';
