@@ -152,7 +152,20 @@ copyBtn.onclick = () => {
 
 }
 
-clearBtn.onclick = () => {
-    inputField.value = '';
-    outputField.innerHTML = '';
+copyBtn.onclick = () => {
+    const textToCopy = outputField.innerText;
+
+    if (textToCopy) {
+
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+                alert('Text copied to clipboard!');
+            })
+            .catch((err) => {
+                console.error('Failed to copy text: ', err);
+            });
+    } 
+    else {
+        alert('No text to copy!');
+    }
 }
