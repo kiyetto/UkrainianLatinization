@@ -71,7 +71,7 @@ function softening(input) {
 function jotation(input) {
     let output = '';
 
-    const consonants = "бвгґдйклмнпрстфхцчшщьБВГҐДЙКЛМНПРСТФХЦЧШЩЬ";
+    const consonants = "бвгґджзйклмнпрстфхцчшщьБВГҐДЙКЛМНПРСТФХЦЧШЩЬ";
     const jottedVowels = {
         "я": "ia",
         "є": "ie",
