@@ -160,8 +160,3 @@ copyBtn.onclick = () => {
         alert('Nemaje teksu!');
     }
 }
-
-clearBtn.onclick = () => {
-    inputField.value = "";
-    outputField.textContent = "Output";
-}
