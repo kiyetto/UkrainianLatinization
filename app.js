@@ -71,22 +71,18 @@ function softening(input) {
 function jotation(input) {
     let output = '';
 
-    const consonants = "бвгґдйклмнпрстфхцчшщьБВГҐДЙКЛМНПРСТФХЦЧШЩЬ";
+    const consonants = "бвгґджзйклмнпрстфхцчшщьБВГҐДЙКЛМНПРСТФХЦЧШЩЬ";
     const jottedVowels = {
         "я": "ia",
         "є": "ie",
         "ю": "iu"
     };
-    const tremaVowels = {
-        "а": "ä",
-        "е": "ë",
-        "о": "ö",
-        "у": "ü"
-    };
+
+    vowels = "аеіоу";
 
     for(let i = 0; i < input.length; i++) {  
-        if(tremaVowels[input[i]] && input[i -1] == 'і') { //Separate already existing combination of i + another vowel using trema 
-            output += tremaVowels[input[i]];
+        if(input[i] == "і" && vowels.includes(input[i + 1])) { //Separate already existing combination of i + another vowel using trema 
+            output += "ī";
         }
         else if(input[i] == 'ь' && input[i + 1] == 'о') { //If there's a ь before an o
             output += 'i';
@@ -156,16 +152,16 @@ copyBtn.onclick = () => {
     const textToCopy = outputField.innerText;
 
     if (textToCopy) {
-
-        navigator.clipboard.writeText(textToCopy)
-            .then(() => {
-                alert('Text copied to clipboard!');
-            })
-            .catch((err) => {
-                console.error('Failed to copy text: ', err);
-            });
+        navigator.clipboard.writeText(textToCopy).catch((err) => {
+            console.error('Joj! Ne vdalosia skopijuvaty tekst: ', err);
+        });
     } 
     else {
-        alert('No text to copy!');
+        alert('Nemaje teksu !');
     }
+}
+
+clearBtn.onclick = () => {
+    inputField.value = "";
+    outputField.textContent = "Output";
 }
