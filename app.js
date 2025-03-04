@@ -157,7 +157,7 @@ copyBtn.onclick = () => {
         });
     } 
     else {
-        alert('Nemaje teksu !');
+        alert('Nemaje teksu!');
     }
 }
 
