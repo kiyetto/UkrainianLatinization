@@ -10,7 +10,7 @@ map = {
     'Ж': 'Ž', 'ж': 'ž',
     'З': 'Z', 'з': 'z',
     'И': 'Y', 'и': 'y',
-    'І': 'I', 'і': 'i',
+    'І': 'İ', 'і': 'i',
     'Ї': 'Ji', 'ї': 'ji',
     'Й': 'J', 'й': 'j',
     'К': 'K', 'к': 'k',
@@ -29,65 +29,25 @@ map = {
     'Ч': 'Č', 'ч': 'č',
     'Ш': 'Š', 'ш': 'š',
     'Щ': 'Šč', 'щ': 'šč',
-    'Ь': '\0', 'ь': '\0',
+    'Ь': 'I', 'ь': 'ı',
     'Ю': 'Ju', 'ю': 'ju',
     'Я': 'Ja', 'я': 'ja',
     '\'': '\0', 'ʼ': '\0', 
     '`': '\0', '´': '\0'
 }
 
-softLetters = {
-    'ц': 'ć',
-    'с': 'ś',
-    'з': 'ź',
-    'н': 'ń',
-    'л': 'ĺ',
-    'т': 'ť',
-    'д': 'ď',
-    'Ц': 'Ć',
-    'С': 'Ś',
-    'З': 'Ź',
-    'Н': 'Ń',
-    'Л': 'Ĺ',
-    'Т': 'Ť',
-    'Д': 'Ď'
-}    
-
-function softening(input) {
-    let output = '';
-
-    for(let i = 0; i < input.length; i++) {
-        if(softLetters[input[i]] && 'Ьь'.includes(input[i + 1])) {
-            output += softLetters[input[i]]; i++;
-        }
-        else {
-            output += input[i];
-        }     
-    }    
-  
-    return output;
-}    
-
 function jotation(input) {
     let output = '';
 
-    const consonants = "бвгґджзйклмнпрстфхцчшщьБВГҐДЙКЛМНПРСТФХЦЧШЩЬ";
+    const consonants = "бвгґджзйклмнпрстфхцчшщьБВГҐДЖЗЙКЛМНПРСТФХЦЧШЩЬ";
     const jottedVowels = {
-        "я": "ia",
-        "є": "ie",
-        "ю": "iu"
+        "я": "ıa",
+        "є": "ıe",
+        "ю": "ıu"
     };
 
-    vowels = "аеіоу";
-
     for(let i = 0; i < input.length; i++) {  
-        if(input[i] == "і" && vowels.includes(input[i + 1])) { //Separate already existing combination of i + another vowel using trema 
-            output += "ī";
-        }
-        else if(input[i] == 'ь' && input[i + 1] == 'о') { //If there's a ь before an o
-            output += 'i';
-        }
-        else if(jottedVowels[input[i]] && consonants.includes(input[i - 1])) { //If current letter is a jotted vowel after a consonant
+        if(jottedVowels[input[i]] && consonants.includes(input[i - 1])) { //If current letter is a jotted vowel after a consonant
             output += jottedVowels[input[i]]
         }
         else {
@@ -102,7 +62,6 @@ function convert(input) {
     let output = '';
 
     input = jotation(input);
-    input = softening(input);
 
     input.split('').forEach((element) => {
         if (map[element]) {
