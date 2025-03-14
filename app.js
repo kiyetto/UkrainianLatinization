@@ -85,7 +85,7 @@ function softening(input) {
 
     for(let i = 0; i < input.length; i++) {  
         if(softConsonants[input[i]] && input[i + 1] == 'ь') {
-            output += softConsonants[input[i]]; input++;
+            output += softConsonants[input[i]]; i++;
         }
         else {
             output += input[i]
