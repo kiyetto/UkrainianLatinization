@@ -55,6 +55,9 @@ function jotation(input) {
         else if(jottedVowels[input[i]] && consonants.includes(input[i - 1])) { //If current letter is a jotted vowel after a consonant
             output += jottedVowels[input[i]]
         }
+        else if(input[i] == 'ь' && input[i + 1] == 'о') {
+            output += 'i';
+        }
         else {
             output += input[i]
         }
