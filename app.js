@@ -41,14 +41,51 @@ function jotation(input) {
 
     const consonants = "бвгґджзйклмнпрстфхцчшщьБВГҐДЖЗЙКЛМНПРСТФХЦЧШЩЬ";
     const jottedVowels = {
-        "я": "ıa",
-        "є": "ıe",
-        "ю": "ıu"
+        "я": "ia",
+        "є": "ie",
+        "ю": "iu"
     };
 
+    const vowels = "АЕІОУИаеіоуи";
+
     for(let i = 0; i < input.length; i++) {  
-        if(jottedVowels[input[i]] && consonants.includes(input[i - 1])) { //If current letter is a jotted vowel after a consonant
+        if (input[i] == 'і' && vowels.includes(input[i + 1])) {
+            input = 'ï';
+        }
+        else if(jottedVowels[input[i]] && consonants.includes(input[i - 1])) { //If current letter is a jotted vowel after a consonant
             output += jottedVowels[input[i]]
+        }
+        else {
+            output += input[i]
+        }
+    }
+
+    return output;
+}
+
+function softening(input) {
+    let output = '';
+
+    const softConsonants = {
+        'с': 'ś',
+        'з': 'ź',
+        'ц': 'ć',
+        'н': 'ń',
+        'л': 'ľ',
+        'т': 'ť',
+        'д': 'ď',
+        'С': 'Ś',
+        'З': 'Ź',
+        'Ц': 'Ć',
+        'Н': 'Ń',
+        'Л': 'Ľ',
+        'Т': 'Ť',
+        'Д': 'Ď'
+    }
+
+    for(let i = 0; i < input.length; i++) {  
+        if(softConsonants[input[i]] && input[i + 1] == 'ь') {
+            output += softConsonants[input[i]]
         }
         else {
             output += input[i]
