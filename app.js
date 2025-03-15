@@ -50,7 +50,7 @@ function jotation(input) {
 
     for(let i = 0; i < input.length; i++) {  
         if (input[i] == 'і' && vowels.includes(input[i + 1])) {
-            output = 'ï';
+            output += 'ï';
         }
         else if(jottedVowels[input[i]] && consonants.includes(input[i - 1])) { //If current letter is a jotted vowel after a consonant
             output += jottedVowels[input[i]]
