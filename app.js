@@ -10,7 +10,7 @@ map = {
     'Ж': 'Ž', 'ж': 'ž',
     'З': 'Z', 'з': 'z',
     'И': 'Y', 'и': 'y',
-    'І': 'I', 'і': 'i',
+    'І': 'İ', 'і': 'i',
     'Ї': 'Ji', 'ї': 'ji',
     'Й': 'J', 'й': 'j',
     'К': 'K', 'к': 'k',
@@ -29,7 +29,7 @@ map = {
     'Ч': 'Č', 'ч': 'č',
     'Ш': 'Š', 'ш': 'š',
     'Щ': 'Šč', 'щ': 'šč',
-    'Ь': 'ʼ', 'ь': 'ʼ',
+    'Ь': 'I', 'ь': 'ı',
     'Ю': 'Ju', 'ю': 'ju',
     'Я': 'Ja', 'я': 'ja',
     '\'': '\0', 'ʼ': '\0', 
@@ -41,54 +41,14 @@ function jotation(input) {
 
     const consonants = "бвгґджзйклмнпрстфхцчшщьБВГҐДЖЗЙКЛМНПРСТФХЦЧШЩЬ";
     const jottedVowels = {
-        "я": "ia",
-        "є": "ie",
-        "ю": "iu"
+        "я": "ıa",
+        "є": "ıe",
+        "ю": "ıu"
     };
 
-    const vowels = "АЕІОУИаеіоуи";
-
     for(let i = 0; i < input.length; i++) {  
-        if (input[i] == 'і' && vowels.includes(input[i + 1])) {
-            output += 'ï';
-        }
-        else if(jottedVowels[input[i]] && consonants.includes(input[i - 1])) { //If current letter is a jotted vowel after a consonant
+        if(jottedVowels[input[i]] && consonants.includes(input[i - 1])) { //If current letter is a jotted vowel after a consonant
             output += jottedVowels[input[i]]
-        }
-        else if(input[i] == 'ь' && input[i + 1] == 'о') {
-            output += 'i';
-        }
-        else {
-            output += input[i]
-        }
-    }
-
-    return output;
-}
-
-function softening(input) {
-    let output = '';
-
-    const softConsonants = {
-        'с': 'ś',
-        'з': 'ź',
-        'ц': 'ć',
-        'н': 'ń',
-        'л': 'ľ',
-        'т': 'ť',
-        'д': 'ď',
-        'С': 'Ś',
-        'З': 'Ź',
-        'Ц': 'Ć',
-        'Н': 'Ń',
-        'Л': 'Ľ',
-        'Т': 'Ť',
-        'Д': 'Ď'
-    }
-
-    for(let i = 0; i < input.length; i++) {  
-        if(softConsonants[input[i]] && input[i + 1] == 'ь') {
-            output += softConsonants[input[i]]; i++;
         }
         else {
             output += input[i]
@@ -102,7 +62,6 @@ function convert(input) {
     let output = '';
 
     input = jotation(input);
-    input = softening(input);
 
     input.split('').forEach((element) => {
         if (map[element]) {
