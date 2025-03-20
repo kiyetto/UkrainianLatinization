@@ -24,12 +24,12 @@ map = {
     'Т': 'T', 'т': 't',
     'У': 'U', 'у': 'u',
     'Ф': 'F', 'ф': 'f',
-    'Х': 'Ħ', 'х': 'ħ',
+    'Х': 'Ch', 'х': 'ch',
     'Ц': 'C', 'ц': 'c',
     'Ч': 'Č', 'ч': 'č',
     'Ш': 'Š', 'ш': 'š',
     'Щ': 'Šč', 'щ': 'šč',
-    'Ь': 'Î', 'ь': 'ı',
+    'Ь': 'Ĭ', 'ь': 'ĭ',
     'Ю': 'Ju', 'ю': 'ju',
     'Я': 'Ja', 'я': 'ja',
     '\'': '\0', 'ʼ': '\0', 
@@ -41,9 +41,9 @@ function jotation(input) {
 
     const consonants = "бвгґджзйклмнпрстфхцчшщьБВГҐДЖЗЙКЛМНПРСТФХЦЧШЩЬ";
     const jottedVowels = {
-        "я": "ıa",
-        "є": "ıe",
-        "ю": "ıu"
+        "я": "ĭa",
+        "є": "ĭe",
+        "ю": "ĭu"
     };
 
     for(let i = 0; i < input.length; i++) {  
@@ -112,7 +112,7 @@ copyBtn.onclick = () => {
 
     if (textToCopy) {
         navigator.clipboard.writeText(textToCopy).catch((err) => {
-            console.error('Joj! Ne vdalosia skopijuvaty tekst: ', err);
+            console.error('Joj! Ne vdalosĭa skopijuvaty tekst: ', err);
         });
     } 
     else {
