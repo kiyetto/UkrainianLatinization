@@ -39,7 +39,7 @@ map = {
 function jotation(input) {
     let output = '';
 
-    const consonants = "бвгґджзйклмнпрстфхцчшщьБВГҐДЖЗЙКЛМНПРСТФХЦЧШЩЬ";
+    const consonants = "бвгґджзйклмнпрстфхцчшщБВГҐДЖЗЙКЛМНПРСТФХЦЧШЩ";
     const jottedVowels = {
         "я": "ĭa",
         "є": "ĭe",
