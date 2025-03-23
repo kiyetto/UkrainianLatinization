@@ -37,7 +37,7 @@
 š -> sx <br>
 č -> cx <br>
 ž -> zx <br>
-ĭ -> ui <br>
+ĭ -> ui/ī/ǐ/î <br>
 </center>
 
 ## <center>Приклад гімну України:</center>
