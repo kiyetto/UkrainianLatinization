@@ -1,4 +1,4 @@
-map = {
+const characters = {
     'А': 'A', 'а': 'a',
     'Б': 'B', 'б': 'b',
     'В': 'V', 'в': 'v',
@@ -6,12 +6,10 @@ map = {
     'Ґ': 'G', 'ґ': 'g',
     'Д': 'D', 'д': 'd',
     'Е': 'E', 'е': 'e',
-    'Є': 'Je', 'є': 'je',
     'Ж': 'Ž', 'ж': 'ž',
     'З': 'Z', 'з': 'z',
     'И': 'Y', 'и': 'y',
     'І': 'I', 'і': 'i',
-    'Ї': 'Ji', 'ї': 'ji',
     'Й': 'J', 'й': 'j',
     'К': 'K', 'к': 'k',
     'Л': 'L', 'л': 'l',
@@ -24,103 +22,185 @@ map = {
     'Т': 'T', 'т': 't',
     'У': 'U', 'у': 'u',
     'Ф': 'F', 'ф': 'f',
-    'Х': 'Ch', 'х': 'ch',
     'Ц': 'C', 'ц': 'c',
     'Ч': 'Č', 'ч': 'č',
     'Ш': 'Š', 'ш': 'š',
-    'Щ': 'Šč', 'щ': 'šč',
     'Ь': 'Ĭ', 'ь': 'ĭ',
-    'Ю': 'Ju', 'ю': 'ju',
+}
+
+const digraphs = {
+    'Х': 'Ch', 'х': 'ch',
+    'Щ': 'Šč', 'щ': 'šč',
+}
+
+const jotatedFull = {
+    'Є': 'Je', 'є': 'je', 
+    'Ю': 'Ju', 'ю': 'ju', 
     'Я': 'Ja', 'я': 'ja',
-    '\'': '\0', 'ʼ': '\0', 
-    '`': '\0', '´': '\0'
+    'Ї': 'Ji', 'ї': 'ji',
 }
 
-function jotation(input) {
-    let output = '';
+const jotatedFullCaps = {
+    'JE': 'Є', 'JU': 'Ю', 'JA': 'Я', 'JI': 'Ї'
+}
 
-    const consonants = "бвгґджзйклмнпрстфхцчшщБВГҐДЖЗЙКЛМНПРСТФХЦЧШЩ";
-    const jottedVowels = {
-        "я": "ĭa",
-        "є": "ĭe",
-        "ю": "ĭu"
-    };
+const jotatedSoft = {
+    'Є': 'Ĭe', 'є': 'ĭe', 
+    'Ю': 'Ĭu', 'ю': 'ĭu',
+    'Я': 'Ĭa', 'я': 'ĭa',
+}
 
-    for(let i = 0; i < input.length; i++) {  
-        if(jottedVowels[input[i]] && consonants.includes(input[i - 1])) { //If current letter is a jotted vowel after a consonant
-            output += jottedVowels[input[i]]
+const jotatedSoftCaps = {
+    'ĬE': 'Є', 'ĬU': 'Ю', 'ĬA': 'Я'
+}
+
+const consonants = "бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ";
+const consonantsLatin = 'bvhgdžzklmnprstfcčšBVHGDŽZKLMNPRSTFCČŠ'; 
+const apostrophes = "'`́ʼʼ"
+
+function haveToCapitalize(curr, prev, next) {
+    return ((prev && (prev.toLowerCase() !== prev.toUpperCase()) && prev === prev.toUpperCase() && curr === curr.toUpperCase()) || 
+           (next && (next.toLowerCase() !== next.toUpperCase()) && next === next.toUpperCase() && curr === curr.toUpperCase()));
+}
+
+function cyrillicToLatin(input) {
+    output = "";
+
+    for(let i = 0; i < input.length; i++) {
+        const curr = input[i];
+        const prev = input[i - 1];
+        const next = input[i + 1];
+
+        if(characters[curr]) {
+            output += characters[curr];
         }
+        else if(digraphs[curr]) {
+            if (haveToCapitalize(curr, prev, next)) {
+                output += digraphs[curr].toUpperCase();
+            } 
+            else {
+                output += digraphs[curr];
+            }
+        }
+        else if(jotatedFull[curr]) {
+            if(prev && consonants.includes(prev)) {
+                if(haveToCapitalize(curr, prev, next)) {
+                    output += jotatedSoft[curr].toUpperCase();
+                } 
+                else {
+                    output += jotatedSoft[curr];
+                }
+            }
+            else {
+                if(haveToCapitalize(curr, prev, next)) {
+                    output += jotatedFull[curr].toUpperCase();
+                } 
+                else {
+                    output += jotatedFull[curr];
+                }
+            }
+        }
+        else if(apostrophes.includes(curr)) {}
         else {
-            output += input[i]
+            output += curr;
         }
     }
 
     return output;
 }
 
-function convert(input) {
-    let output = '';
+function key(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+}
 
-    input = jotation(input);
+function latinToCyrillic(input) {
+    output = "";
 
-    input.split('').forEach((element) => {
-        if (map[element]) {
-            output += map[element]; 
-        } 
-        else if (element == '\n') {
-            output += '<br>';
+    for(let i = 0; i < input.length; i++) {
+        const curr = input[i];
+        const next = input[i + 1];
+        const prev = input[i - 1];
+        
+        if(next && key(jotatedFull, curr + next)) {
+            if(prev && consonantsLatin.includes(prev)) {
+                output += 'ʼ' + key(jotatedFull, curr + next);
+            } 
+            else {
+                output += key(jotatedFull, curr + next);
+            }
+            i++;
+        }
+        else if(next && jotatedFullCaps[curr + next]) {
+            if(prev && consonantsLatin.includes(prev)) {
+                output += 'ʼ' + jotatedFullCaps[curr + next]; 
+            } 
+            else {
+                output += jotatedFullCaps[curr + next]; 
+            }
+            i++;
+        }
+        else if(next && key(jotatedSoft, curr + next)) {
+            output += key(jotatedSoft, curr + next); i++;
+        }
+        else if(next && jotatedSoftCaps[curr + next]) {
+            output += jotatedSoftCaps[curr + next]; i++;
+        }
+        else if(next && key(digraphs, curr + next)) {
+            output += key(digraphs, curr + next); i++;
+        }
+        else if(key(characters, curr)) {
+            output += key(characters, curr);
         }
         else {
-            output += element;  
+            output += curr;
         }
-    });
+
+    }
 
     return output;
 }
 
-const inputField = document.getElementById('input');
-const outputField = document.getElementById('output');
-const convertBtn = document.getElementById('convert');
-const copyBtn = document.getElementById('copy');
-const clearBtn = document.getElementById('clear');
+const cyrrilicField = document.querySelector("#cyrillic");
+const latinField = document.querySelector("#latin");
 
-function convertInput() {
-    outputField.innerHTML = '';
-    convertedText = convert(input.value);
-    outputField.innerHTML = convert(input.value);
-}
-
-convertBtn.onclick = () => {
-    convertInput();
-}
-
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        convertInput();
-    }
+cyrrilicField.addEventListener("keyup", () => {
+    latinField.value = cyrillicToLatin(cyrrilicField.value);
 });
 
-copyBtn.onclick = () => {
-    if (outputField.innerText) {
-        navigator.clipboard.writeText(textToCopy)
-    }
+latinField.addEventListener("keyup", () => {
+    cyrrilicField.value = latinToCyrillic(latinField.value);
+});
 
+const clearBtns = document.querySelectorAll(".clear-btn");
+
+clearBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        cyrrilicField.value = '';
+        latinField.value = '';
+    })
+})
+
+function copy(field) {
+    if(!field) return;
+
+    const txt = field.value;
+
+    console.log(txt);
+
+    if (!txt) return;
+
+    navigator.clipboard.writeText(txt).catch((err) => {
+        console.error('Joj! Ne vdalosĭa skopijuvaty tekst: ', err);
+    });
 }
 
-copyBtn.onclick = () => {
-    const textToCopy = outputField.innerText;
+const latinCopyBtn = document.querySelector(".latin-copy-btn");
+const cyrillicCopyBtn = document.querySelector(".cyrillic-copy-btn");
 
-    if (textToCopy) {
-        navigator.clipboard.writeText(textToCopy).catch((err) => {
-            console.error('Joj! Ne vdalosĭa skopijuvaty tekst: ', err);
-        });
-    } 
-    else {
-        alert('Nemaje teksu!');
-    }
-}
+latinCopyBtn.addEventListener("click", () => {
+    copy(latinField);
+});
 
-clearBtn.onclick = () => {
-    inputField.value = '';
-    outputField.textContent = 'Output';
-}
+cyrillicCopyBtn.addEventListener("click", () => {
+    copy(cyrrilicField);
+});

@@ -3,20 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ukrajinsĭka Latynka</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="icon" href="ukrlat-converter-logo.png" type="image/icon type">
 </head>
+<body>
     <div id="title">🇺🇦Ukrajinsĭka Latynka</div>
     <div id="sub-title">by francheez</div>
     <div id="fields">
-        <textarea id="input"></textarea>
-        <div id="output">Output</div>
+        <div class="textarea-container">
+            <textarea id="cyrillic" class="fields" placeholder="Кирилиця"></textarea>
+            <div class="button-row">
+                <button class="copy-btn cyrillic-copy-btn material-symbols-outlined">content_copy</button>
+                <button class="clear-btn material-symbols-outlined">cancel</button>
+            </div>
+        </div>
+        <div class="textarea-container">
+            <textarea id="latin" class="fields" placeholder="Latynycĭa"></textarea>
+            <div class="button-row">
+                <button class="copy-btn latin-copy-btn material-symbols-outlined">content_copy</button>
+                <button class="clear-btn material-symbols-outlined">cancel</button>
+            </div>
+        </div>
     </div>
-    <div id="buttons">
-        <button id="clear">Očystyty</button>
-        <button id="convert">Konvertuvaty</button>
-        <button id="copy">Kopijuvaty</button>
-    </div>
+
+    <script src="app.js"></script>
 </body>
-<script src="app.js"></script>
 </html>
