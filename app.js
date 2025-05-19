@@ -81,6 +81,7 @@ const digraphs = {
     'ju': 'ю', 'Ju': 'Ю',
     'ji': 'ї', 'Ji': 'Ї',
     'šč': 'щ', 'Šč': 'Щ',
+    'ch': 'х', 'Ch': 'Х'
 };
 
 const latinSoftLetters = {
