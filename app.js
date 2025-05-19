@@ -1,167 +1,166 @@
-const characters = {
-    'А': 'A', 'а': 'a',
-    'Б': 'B', 'б': 'b',
-    'В': 'V', 'в': 'v',
-    'Г': 'H', 'г': 'h',
-    'Ґ': 'G', 'ґ': 'g',
-    'Д': 'D', 'д': 'd',
-    'Е': 'E', 'е': 'e',
-    'Ж': 'Ž', 'ж': 'ž',
-    'З': 'Z', 'з': 'z',
-    'И': 'Y', 'и': 'y',
-    'І': 'I', 'і': 'i',
-    'Й': 'J', 'й': 'j',
-    'К': 'K', 'к': 'k',
-    'Л': 'L', 'л': 'l',
-    'М': 'M', 'м': 'm',
-    'Н': 'N', 'н': 'n',
-    'О': 'O', 'о': 'o',
-    'П': 'P', 'п': 'p',
-    'Р': 'R', 'р': 'r',
-    'С': 'S', 'с': 's',
-    'Т': 'T', 'т': 't',
-    'У': 'U', 'у': 'u',
-    'Ф': 'F', 'ф': 'f',
-    'Ц': 'C', 'ц': 'c',
-    'Ч': 'Č', 'ч': 'č',
-    'Ш': 'Š', 'ш': 'š',
-    'Ь': 'Ĭ', 'ь': 'ĭ',
-}
+const latinMatches = {
+    'а': 'a', 'А': 'A',
+    'б': 'b', 'Б': 'B',
+    'в': 'v', 'В': 'V',
+    'г': 'h', 'Г': 'H',
+    'ґ': 'g', 'Ґ': 'G',
+    'д': 'd', 'Д': 'D',
+    'е': 'e', 'Е': 'E',
+    'є': 'je', 'Є': 'Je',
+    'ж': 'ž', 'Ж': 'Ž',
+    'з': 'z', 'З': 'Z',
+    'и': 'y', 'И': 'Y',
+    'і': 'i', 'І': 'I',
+    'ї': 'ji', 'Ї': 'Ji',
+    'й': 'j', 'Й': 'J',
+    'к': 'k', 'К': 'K',
+    'л': 'l', 'Л': 'L',
+    'м': 'm', 'М': 'M',
+    'н': 'n', 'Н': 'N',
+    'о': 'o', 'О': 'O',
+    'п': 'p', 'П': 'P',
+    'р': 'r', 'Р': 'R',
+    'с': 's', 'С': 'S',
+    'т': 't', 'Т': 'T',
+    'у': 'u', 'У': 'U',
+    'ф': 'f', 'Ф': 'F',
+    'х': 'ħ', 'Х': 'Ħ',
+    'ц': 'c', 'Ц': 'C',
+    'ч': 'č', 'Ч': 'Č',
+    'ш': 'š', 'Ш': 'Š',
+    'щ': 'šč', 'Щ': 'Šč',
+    'ю': 'ju', 'Ю': 'Ju',
+    'я': 'ja', 'Я': 'Ja',
+    'ь': 'ĭ', 'Ь': 'Ĭ',
+    'ъ': 'ŭ', 'Ъ': 'Ŭ',
+    'ѣ': 'ě', 'Ѣ': 'Ě',
+    'ы': 'ÿ', 'Ы': 'Ÿ',
+    'ӱ': 'ü', 'Ӱ': 'Ü',
+    'ў': 'w', 'Ў': 'W',
+};
+
+const cyrillicMatches = {
+    'a': 'а', 'A': 'А',
+    'b': 'б', 'B': 'Б',
+    'v': 'в', 'V': 'В',
+    'h': 'г', 'H': 'Г',
+    'g': 'ґ', 'G': 'Ґ',
+    'd': 'д', 'D': 'Д',
+    'e': 'е', 'E': 'Е',
+    'ž': 'ж', 'Ž': 'Ж',
+    'z': 'з', 'Z': 'З',
+    'y': 'и', 'Y': 'И',
+    'i': 'і', 'I': 'І',
+    'j': 'й', 'J': 'Й',
+    'k': 'к', 'K': 'К',
+    'l': 'л', 'L': 'Л',
+    'm': 'м', 'M': 'М',
+    'n': 'н', 'N': 'Н',
+    'o': 'о', 'O': 'О',
+    'p': 'п', 'P': 'П',
+    'r': 'р', 'R': 'Р',
+    's': 'с', 'S': 'С',
+    't': 'т', 'T': 'Т',
+    'u': 'у', 'U': 'У',
+    'f': 'ф', 'F': 'Ф',
+    'ħ': 'х', 'Ħ': 'Х',
+    'c': 'ц', 'C': 'Ц',
+    'č': 'ч', 'Č': 'Ч',
+    'š': 'ш', 'Š': 'Ш',
+    'ĭ': 'ь', 'Ĭ': 'Ь',
+    'ŭ': 'ъ', 'Ŭ': 'Ъ',
+    'ÿ': 'ы', 'Ÿ': 'Ы',
+    'ü': 'ӱ', 'Ü': 'Ӱ',
+    'ě': 'ѣ', 'Ě': 'Ѣ',
+    'w': 'ў', 'W': 'Ў',
+};
 
 const digraphs = {
-    'Х': 'Ch', 'х': 'ch',
-    'Щ': 'Šč', 'щ': 'šč',
+    'ja': 'я', 'Ja': 'Я',
+    'je': 'є', 'Je': 'Є',
+    'ju': 'ю', 'Ju': 'Ю',
+    'ji': 'ї', 'Ji': 'Ї',
+    'šč': 'щ', 'Šč': 'Щ',
+};
+
+const latinSoftLetters = {
+    'ц': 'ć', 'Ц': 'Ć',
+    'д': 'ď', 'Д': 'Ď',
+    'л': 'ľ', 'Л': 'Ľ',
+    'н': 'ń', 'Н': 'Ń',
+    'р': 'ŕ', 'Р': 'Ŕ',
+    'с': 'ś', 'С': 'Ś',
+    'т': 'ť', 'Т': 'Ť',
+    'з': 'ź', 'З': 'Ź',
+};
+
+const cyrillicSoftLetters = {
+    'ć': 'ць', 'Ć': 'Ць',
+    'ď': 'дь', 'Ď': 'Дь',
+    'ľ': 'ль', 'Ľ': 'Ль',
+    'ń': 'нь', 'Ń': 'Нь',
+    'ŕ': 'рь', 'Ŕ': 'Рь',
+    'ś': 'сь', 'Ś': 'Сь',
+    'ť': 'ть', 'Ť': 'Ть',
+    'ź': 'зь', 'Ź': 'Зь',
+};
+
+consonants = "бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ";
+
+function cyrillicToLatin(src) {
+    let txt = src;  
+
+    txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])я/g, "ia");
+    txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])є/g, "ie");
+    txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])ю/g, "iu");
+    txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])ьо/g, "io");
+
+    txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])іа/g, "ïa");
+    txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])іе/g, "ïe");
+    txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])іу/g, "ïu");
+    txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])іо/g, "ïo");
+
+
+    txt = txt.replace(/([цдлнрстзЦДЛНРСТЗ])ь/g, (match, cons) => (latinSoftLetters[cons] || cons));
+
+    txt = txt.replace(/(['`́ʼʼ])/g, "");
+
+    txt = txt.replace(/[а-яА-ЯґҐіІїЇєЄ]/g, match => latinMatches[match] || match);
+
+    return txt;
 }
 
-const jotatedFull = {
-    'Є': 'Je', 'є': 'je', 
-    'Ю': 'Ju', 'ю': 'ju', 
-    'Я': 'Ja', 'я': 'ja',
-    'Ї': 'Ji', 'ї': 'ji',
+function latinToCyrillic(src) {
+    let txt = src;  
+
+    txt = txt.replace(/(?<=[bvhgdžzklmnprstfħcčšBVHGDŽZKLMNPRSTFĦCČŠ])ia/g, "я");
+    txt = txt.replace(/(?<=[bvhgdžzklmnprstfħcčšBVHGDŽZKLMNPRSTFĦCČŠ])ie/g, "є");
+    txt = txt.replace(/(?<=[bvhgdžzklmnprstfħcčšBVHGDŽZKLMNPRSTFĦCČŠ])iu/g, "ю");
+    txt = txt.replace(/(?<=[bvhgdžzklmnprstfħcčšBVHGDŽZKLMNPRSTFĦCČŠ])io/g, "ьо");
+
+    txt = txt.replace(/(?<=[bvhgdžzklmnprstfħcčšBVHGDŽZKLMNPRSTFĦCČŠ])ïa/g, "іа");
+    txt = txt.replace(/(?<=[bvhgdžzklmnprstfħcčšBVHGDŽZKLMNPRSTFĦCČŠ])ïe/g, "іе");
+    txt = txt.replace(/(?<=[bvhgdžzklmnprstfħcčšBVHGDŽZKLMNPRSTFĦCČŠ])ïu/g, "іу");
+    txt = txt.replace(/(?<=[bvhgdžzklmnprstfħcčšBVHGDŽZKLMNPRSTFĦCČŠ])ïo/g, "іо");
+
+    txt = txt.replace(/(?<=[bvhgdžzklmnprstfħcčšBVHGDŽZKLMNPRSTFĦCČŠ])ja/g, "ʼя");
+    txt = txt.replace(/(?<=[bvhgdžzklmnprstfħcčšBVHGDŽZKLMNPRSTFĦCČŠ])je/g, "ʼє");
+    txt = txt.replace(/(?<=[bvhgdžzklmnprstfħcčšBVHGDŽZKLMNPRSTFĦCČŠ])ju/g, "ʼю");
+    txt = txt.replace(/(?<=[bvhgdžzklmnprstfħcčšBVHGDŽZKLMNPRSTFĦCČŠ])ji/g, "ʼї");
+
+    const pattern = new RegExp(Object.keys(digraphs).join('|'), 'g');
+
+    txt = txt.replace(pattern, match => digraphs[match] || match);
+
+    txt = txt.replace(/[ćďľńŕśťźĆĎĽŃŔŚŤŹ]/g, (cons) => (cyrillicSoftLetters[cons] || cons));
+
+    txt = txt.replace(/\p{L}/gu, match => cyrillicMatches[match] || match);
+
+    return txt;
 }
 
-const jotatedFullCaps = {
-    'JE': 'Є', 'JU': 'Ю', 'JA': 'Я', 'JI': 'Ї'
-}
-
-const jotatedSoft = {
-    'Є': 'Ĭe', 'є': 'ĭe', 
-    'Ю': 'Ĭu', 'ю': 'ĭu',
-    'Я': 'Ĭa', 'я': 'ĭa',
-}
-
-const jotatedSoftCaps = {
-    'ĬE': 'Є', 'ĬU': 'Ю', 'ĬA': 'Я'
-}
-
-const consonants = "бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ";
-const consonantsLatin = 'bvhgdžzklmnprstfcčšBVHGDŽZKLMNPRSTFCČŠ'; 
-const apostrophes = "'`́ʼʼ"
-
-function haveToCapitalize(curr, prev, next) {
-    return ((prev && (prev.toLowerCase() !== prev.toUpperCase()) && prev === prev.toUpperCase() && curr === curr.toUpperCase()) || 
-           (next && (next.toLowerCase() !== next.toUpperCase()) && next === next.toUpperCase() && curr === curr.toUpperCase()));
-}
-
-function cyrillicToLatin(input) {
-    output = "";
-
-    for(let i = 0; i < input.length; i++) {
-        const curr = input[i];
-        const prev = input[i - 1];
-        const next = input[i + 1];
-
-        if(characters[curr]) {
-            output += characters[curr];
-        }
-        else if(digraphs[curr]) {
-            if (haveToCapitalize(curr, prev, next)) {
-                output += digraphs[curr].toUpperCase();
-            } 
-            else {
-                output += digraphs[curr];
-            }
-        }
-        else if(jotatedFull[curr]) {
-            if(prev && consonants.includes(prev)) {
-                if(haveToCapitalize(curr, prev, next)) {
-                    output += jotatedSoft[curr].toUpperCase();
-                } 
-                else {
-                    output += jotatedSoft[curr];
-                }
-            }
-            else {
-                if(haveToCapitalize(curr, prev, next)) {
-                    output += jotatedFull[curr].toUpperCase();
-                } 
-                else {
-                    output += jotatedFull[curr];
-                }
-            }
-        }
-        else if(apostrophes.includes(curr)) {}
-        else {
-            output += curr;
-        }
-    }
-
-    return output;
-}
-
-function key(object, value) {
-    return Object.keys(object).find(key => object[key] === value);
-}
-
-function latinToCyrillic(input) {
-    output = "";
-
-    for(let i = 0; i < input.length; i++) {
-        const curr = input[i];
-        const next = input[i + 1];
-        const prev = input[i - 1];
-        
-        if(next && key(jotatedFull, curr + next)) {
-            if(prev && consonantsLatin.includes(prev)) {
-                output += 'ʼ' + key(jotatedFull, curr + next);
-            } 
-            else {
-                output += key(jotatedFull, curr + next);
-            }
-            i++;
-        }
-        else if(next && jotatedFullCaps[curr + next]) {
-            if(prev && consonantsLatin.includes(prev)) {
-                output += 'ʼ' + jotatedFullCaps[curr + next]; 
-            } 
-            else {
-                output += jotatedFullCaps[curr + next]; 
-            }
-            i++;
-        }
-        else if(next && key(jotatedSoft, curr + next)) {
-            output += key(jotatedSoft, curr + next); i++;
-        }
-        else if(next && jotatedSoftCaps[curr + next]) {
-            output += jotatedSoftCaps[curr + next]; i++;
-        }
-        else if(next && key(digraphs, curr + next)) {
-            output += key(digraphs, curr + next); i++;
-        }
-        else if(key(characters, curr)) {
-            output += key(characters, curr);
-        }
-        else {
-            output += curr;
-        }
-
-    }
-
-    return output;
-}
-
-const cyrrilicField = document.querySelector("#cyrillic");
-const latinField = document.querySelector("#latin");
+const cyrrilicField = document.getElementById("cyrillic");
+const latinField = document.getElementById("latin");
 
 cyrrilicField.addEventListener("keyup", () => {
     latinField.value = cyrillicToLatin(cyrrilicField.value);
@@ -177,20 +176,21 @@ clearBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
         cyrrilicField.value = '';
         latinField.value = '';
-    })
+    });
 })
 
 function copy(field) {
     if(!field) return;
 
-    const txt = field.value;
-
-    console.log(txt);
+     let txt = field.value;
+        // .replace(/<br\s*\/?>/gi, '\n')
+        // .replace(/<\/div>/gi, '\n')           
+        // .replace(/<[^>]+>/g, '') 
 
     if (!txt) return;
 
     navigator.clipboard.writeText(txt).catch((err) => {
-        console.error('Joj! Ne vdalosĭa skopijuvaty tekst: ', err);
+        console.error('Error', err);
     });
 }
 
@@ -203,4 +203,33 @@ latinCopyBtn.addEventListener("click", () => {
 
 cyrillicCopyBtn.addEventListener("click", () => {
     copy(cyrrilicField);
+});
+
+let lastFocusedTextarea = null;
+
+document.querySelectorAll('textarea').forEach(textarea => {
+    textarea.addEventListener('focus', () => {
+        lastFocusedTextarea = textarea;
+    });
+});
+
+function insertChar(char) {
+    if (!lastFocusedTextarea) return;
+
+    const start = lastFocusedTextarea.selectionStart;
+    const end = lastFocusedTextarea.selectionEnd;
+    const value = lastFocusedTextarea.value;
+
+    lastFocusedTextarea.value = value.slice(0, start) + char + value.slice(end);
+    lastFocusedTextarea.selectionStart = lastFocusedTextarea.selectionEnd = start + char.length;
+
+    lastFocusedTextarea.focus();
+}
+
+document.querySelectorAll('.special-char-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        const char = btn.textContent.trim();
+        insertChar(char);
+    });
 });

@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: Verdana, sans-serif;
     background-color: #1E2A47; /* Dark Blue Background */
     color: white; /* White Text */
     display: flex;
@@ -68,12 +68,24 @@ body {
     transition: opacity 0.3s ease;
 }   
 
-.copy-btn, .clear-btn {
+.char-button-row {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.copy-btn, .clear-btn, .special-char-btn {
+    aspect-ratio: 1 / 1;
     background-color: #3498db;
     color: white;
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
+    font-size: 30px;
+    align-items: center;
+    font-weight: bold;
+    height: auto;
 }
 
 .textarea-container:hover .button-row {
@@ -82,6 +94,6 @@ body {
 }
 
 
-.copy-btn:hover, .clear-btn:hover {
+.copy-btn:hover, .clear-btn:hover, .special-char-btn:hover {
     background-color: #2980b9; /* Darker blue on hover */
 }
