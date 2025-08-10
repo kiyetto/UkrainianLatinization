@@ -31,12 +31,7 @@ const latinMatches = {
     'щ': 'šč', 'Щ': 'Šč',
     'ю': 'ju', 'Ю': 'Ju',
     'я': 'ja', 'Я': 'Ja',
-    'ь': 'ĭ', 'Ь': 'Ĭ',
-    'ъ': 'ŭ', 'Ъ': 'Ŭ',
-    'ѣ': 'ě', 'Ѣ': 'Ě',
-    'ы': 'ÿ', 'Ы': 'Ÿ',
-    'ӱ': 'ü', 'Ӱ': 'Ü',
-    'ў': 'w', 'Ў': 'W',
+    'ь': '́', 'Ь': '́'
 };
 
 const cyrillicMatches = {
@@ -66,7 +61,8 @@ const cyrillicMatches = {
     'x': 'х', 'X': 'Х',
     'c': 'ц', 'C': 'Ц',
     'č': 'ч', 'Č': 'Ч',
-    'š': 'ш', 'Š': 'Ш'
+    'š': 'ш', 'Š': 'Ш',
+    '́': 'ь'
 };
 
 const digraphs = {
@@ -226,5 +222,18 @@ document.querySelectorAll('.special-char-btn').forEach(btn => {
         e.preventDefault(); 
         const char = btn.textContent.trim();
         insertChar(char);
+    });
+});
+
+const keyboardBtn = document.querySelector(".keyboard-btn");
+
+keyboardBtn.addEventListener("click", () => {
+    document.querySelectorAll(".char-button-row").forEach((row) => {
+        if(row.style.display === "flex") {
+            row.style.display = "none";
+        }   
+        else {
+            row.style.display = "flex";
+        }
     });
 });
