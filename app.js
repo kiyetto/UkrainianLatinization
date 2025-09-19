@@ -113,7 +113,7 @@ function cyrillicToLatin(src) {
 
     txt = txt.replace(/([цдлнрстзЦДЛНРСТЗ])ь/g, (match, cons) => (latinSoftLetters[cons] || cons));
 
-    txt = txt.replace(/(['`́ʼʼ])/g, "");
+    txt = txt.replace(/(['`ʼ])/g, "");
 
     txt = txt.replace(/[а-яА-ЯґҐіІїЇєЄ]/g, match => latinMatches[match] || match);
 
