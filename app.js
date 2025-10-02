@@ -24,7 +24,7 @@ const latinMatches = {
     'т': 't', 'Т': 'T',
     'у': 'u', 'У': 'U',
     'ф': 'f', 'Ф': 'F',
-    'х': 'ch', 'Х': 'Ch',
+    'х': 'ħ', 'Х': 'Ħ',
     'ц': 'c', 'Ц': 'C',
     'ч': 'č', 'Ч': 'Č',
     'ш': 'š', 'Ш': 'Š',
@@ -39,6 +39,7 @@ const cyrillicMatches = {
     'b': 'б', 'B': 'Б',
     'v': 'в', 'V': 'В',
     'h': 'г', 'H': 'Г',
+    'ħ': 'х', 'Ħ': 'Х',
     'g': 'ґ', 'G': 'Ґ',
     'd': 'д', 'D': 'Д',
     'e': 'е', 'E': 'Е',
@@ -123,20 +124,20 @@ function cyrillicToLatin(src) {
 function latinToCyrillic(src) {
     let txt = src;  
 
-    txt = txt.replace(/(?<=[bvhgdžzklmnprstfxcčšBVHGDŽZKLMNPRSTFXCČŠ])ia/g, "я");
-    txt = txt.replace(/(?<=[bvhgdžzklmnprstfxcčšBVHGDŽZKLMNPRSTFXCČŠ])ie/g, "є");
-    txt = txt.replace(/(?<=[bvhgdžzklmnprstfxcčšBVHGDŽZKLMNPRSTFXCČŠ])iu/g, "ю");
-    txt = txt.replace(/(?<=[bvhgdžzklmnprstfxcčšBVHGDŽZKLMNPRSTFXCČŠ])io/g, "ьо");
+    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ia/g, "я");
+    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ie/g, "є");
+    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])iu/g, "ю");
+    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])io/g, "ьо");
 
-    txt = txt.replace(/(?<=[bvhgdžzklmnprstfxcčšBVHGDŽZKLMNPRSTFXCČŠ])ïa/g, "іа");
-    txt = txt.replace(/(?<=[bvhgdžzklmnprstfxcčšBVHGDŽZKLMNPRSTFXCČŠ])ïe/g, "іе");
-    txt = txt.replace(/(?<=[bvhgdžzklmnprstfxcčšBVHGDŽZKLMNPRSTFXCČŠ])ïu/g, "іу");
-    txt = txt.replace(/(?<=[bvhgdžzklmnprstfxcčšBVHGDŽZKLMNPRSTFXCČŠ])ïo/g, "іо");
+    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ïa/g, "іа");
+    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ïe/g, "іе");
+    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ïu/g, "іу");
+    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ïo/g, "іо");
 
-    txt = txt.replace(/(?<=[bvhgdžzklmnprstfxcčšBVHGDŽZKLMNPRSTFXCČŠ])ja/g, "ʼя");
-    txt = txt.replace(/(?<=[bvhgdžzklmnprstfxcčšBVHGDŽZKLMNPRSTFXCČŠ])je/g, "ʼє");
-    txt = txt.replace(/(?<=[bvhgdžzklmnprstfxcčšBVHGDŽZKLMNPRSTFXCČŠ])ju/g, "ʼю");
-    txt = txt.replace(/(?<=[bvhgdžzklmnprstfxcčšBVHGDŽZKLMNPRSTFXCČŠ])ji/g, "ʼї");
+    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ja/g, "ʼя");
+    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])je/g, "ʼє");
+    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ju/g, "ʼю");
+    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ji/g, "ʼї");
 
     const pattern = new RegExp(Object.keys(digraphs).join('|'), 'g');
 
