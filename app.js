@@ -62,6 +62,9 @@ const cyrillicMatches = {
     'c': 'ц', 'C': 'Ц',
     'č': 'ч', 'Č': 'Ч',
     'š': 'ш', 'Š': 'Ш',
+    'x': 'кс', 'X': 'X',
+    'w': 'в', 'W': 'В',
+    'q': 'к', 'Q': 'К',
     '́': 'ь'
 };
 
@@ -99,7 +102,7 @@ const cyrillicSoftLetters = {
 consonants = "бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ";
 
 function cyrillicToLatin(src) {
-    let txt = src;  
+    let txt = src;
 
     txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])я/g, "ia");
     txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])є/g, "ie");
@@ -122,7 +125,7 @@ function cyrillicToLatin(src) {
 }
 
 function latinToCyrillic(src) {
-    let txt = src;  
+    let txt = src;
 
     txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ia/g, "я");
     txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ie/g, "є");
@@ -150,33 +153,33 @@ function latinToCyrillic(src) {
     return txt;
 }
 
-const cyrrilicField = document.getElementById("cyrillic");
+const cyrillicField = document.getElementById("cyrillic");
 const latinField = document.getElementById("latin");
 
-cyrrilicField.addEventListener("keyup", () => {
-    latinField.value = cyrillicToLatin(cyrrilicField.value);
+cyrillicField.addEventListener("keyup", () => {
+    latinField.value = cyrillicToLatin(cyrillicField.value);
 });
 
 latinField.addEventListener("keyup", () => {
-    cyrrilicField.value = latinToCyrillic(latinField.value);
+    cyrillicField.value = latinToCyrillic(latinField.value);
 });
 
 const clearBtns = document.querySelectorAll(".clear-btn");
 
 clearBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-        cyrrilicField.value = '';
+        cyrillicField.value = '';
         latinField.value = '';
     });
 })
 
 function copy(field) {
-    if(!field) return;
+    if (!field) return;
 
-     let txt = field.value;
-        // .replace(/<br\s*\/?>/gi, '\n')
-        // .replace(/<\/div>/gi, '\n')           
-        // .replace(/<[^>]+>/g, '') 
+    let txt = field.value;
+    // .replace(/<br\s*\/?>/gi, '\n')
+    // .replace(/<\/div>/gi, '\n')           
+    // .replace(/<[^>]+>/g, '') 
 
     if (!txt) return;
 
@@ -193,7 +196,7 @@ latinCopyBtn.addEventListener("click", () => {
 });
 
 cyrillicCopyBtn.addEventListener("click", () => {
-    copy(cyrrilicField);
+    copy(cyrillicField);
 });
 
 let lastFocusedTextarea = null;
@@ -215,11 +218,15 @@ function insertChar(char) {
     lastFocusedTextarea.selectionStart = lastFocusedTextarea.selectionEnd = start + char.length;
 
     lastFocusedTextarea.focus();
+
+    if(lastFocusedTextarea === latinField) {
+        cyrillicField.value = latinToCyrillic(latinField.value);
+    }
 }
 
 document.querySelectorAll('.special-char-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         const char = btn.textContent.trim();
         insertChar(char);
     });
@@ -229,9 +236,9 @@ const keyboardBtn = document.querySelector(".keyboard-btn");
 
 keyboardBtn.addEventListener("click", () => {
     document.querySelectorAll(".char-button-row").forEach((row) => {
-        if(row.style.display === "flex") {
+        if (row.style.display === "flex") {
             row.style.display = "none";
-        }   
+        }
         else {
             row.style.display = "flex";
         }
