@@ -137,6 +137,10 @@ function cyrillicToLatin(src) {
     txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])іу/g, "ïu");
     txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])іо/g, "ïo");
 
+    txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])ІА/g, "ÏA");
+    txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])ІЕ/g, "ÏE");
+    txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])ІУ/g, "ÏU");
+    txt = txt.replace(/(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])ІО/g, "ÏO");
 
     txt = txt.replace(/([цдлнрстзЦДЛНРСТЗ])ь/g, (match, cons) => (latinSoftLetters[cons] || cons));
 
@@ -155,10 +159,8 @@ function latinToCyrillic(src) {
     txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])iu/g, "ю");
     txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])io/g, "ьо");
 
-    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ïa/g, "іа");
-    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ïe/g, "іе");
-    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ïu/g, "іу");
-    txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ïo/g, "іо");
+    txt = txt.replace(/ï/g, "і");
+    txt = txt.replace(/Ï/g, "І");
 
     txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])ja/g, "ʼя");
     txt = txt.replace(/(?<=[bvhħgdžzklmnprstfxcčšBVHĦGDŽZKLMNPRSTFXCČŠ])je/g, "ʼє");
